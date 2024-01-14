@@ -56,9 +56,9 @@ function convertTemperature(t) {
   console.log(n, d);
   switch (d) {
     case 'f':
-      return `${parseInt((parseFloat(n) - 32) / 1.8)}°C`;
+      return `${Math.round((parseFloat(n) - 32) / 1.8)}°C`;
     case 'c':
-      return `${parseInt(parseFloat(n) * 1.8 + 32)}°F`;
+      return `${Math.round(parseFloat(n) * 1.8 + 32)}°F`;
   }
 }
 
