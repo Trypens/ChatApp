@@ -10,7 +10,11 @@ CREATE TABLE IF NOT EXISTS users (
     activity VARCHAR(255),
     chat_active TIMESTAMP,
     pw_salt VARCHAR(64),
-    pw_hash VARCHAR(1024)
+    pw_hash VARCHAR(1024) /*,
+    * kikker_icon IMAGE or PATH,
+    * chat_banned BOOLEAN DEFAULT false,
+    * chat_ban_end DATETIME,
+    */
 );
 INSERT INTO users (id, username, chat_nick, user_color, text_color, mood, substance, activity)
 VALUES (0, 'Kikker', 'Kikker', '#c8abb6', '#91be6c', 'pleased', 'bufo', 'vision')

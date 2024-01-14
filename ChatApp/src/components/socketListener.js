@@ -23,6 +23,10 @@ function makeHTML(message) {
   // MAYBE: BBcode color parsing
   let msg = HTMLescape(message.message);
 
+  // TODO: write a more real parser that excludes matched stuff from being matched again (so temp conversionb won't mess up URLs)
+  // URL recognition:
+  msg = msg.replaceAll(UrlRegex, (url) => `<a href="${url}" target="_blank" rel="nofollow ugc noopener noreferrer">${abbreviateUrl(url)}</a>`);
+
   // [b], [i], [u], [s]:
   msg = msg.replaceAll(/\[(\/?[bisu])\]/g, '<$1>');
 
@@ -40,9 +44,6 @@ function makeHTML(message) {
   msg = msg.replaceAll(/\:\|/g, '😐');
   msg = msg.replaceAll(/\:\(/g, '☹️');
 
-  // URL recognition:
-  msg = msg.replaceAll(UrlRegex, (url) => `<a href="${url}" target="_blank" rel="noreferrer">${abbreviateUrl(url)}</a>`);
-
   
   message.message = parse(msg); 
   return message;
@@ -55,9 +56,9 @@ function convertTemperature(t) {
   console.log(n, d);
   switch (d) {
     case 'f':
-      return `${(parseFloat(n) - 32) / 1.8}°C`;
+      return `${parseInt((parseFloat(n) - 32) / 1.8)}°C`;
     case 'c':
-      return `${parseFloat(n) * 1.8 + 32}°F`;
+      return `${parseInt(parseFloat(n) * 1.8 + 32)}°F`;
   }
 }
 
